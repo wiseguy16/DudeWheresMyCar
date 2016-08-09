@@ -17,23 +17,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ulp-hy-wSR">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ulp-hy-wSR">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </mapView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Tap to Mark &amp; Label your car" translatesAutoresizingMaskIntoConstraints="NO" id="PoT-iT-aPY">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="H9h-Sn-fMl"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="PoT-iT-aPY" secondAttribute="trailing" id="MFP-K0-CGP"/>
+                            <constraint firstItem="PoT-iT-aPY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="XTO-9D-Bv0"/>
                             <constraint firstItem="ulp-hy-wSR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZEY-I8-4ZZ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ulp-hy-wSR" secondAttribute="bottom" id="a3M-4w-VLK"/>
+                            <constraint firstItem="PoT-iT-aPY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="a5i-NP-i5G"/>
                             <constraint firstItem="ulp-hy-wSR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="aOS-Nm-K1v"/>
                             <constraint firstAttribute="trailing" secondItem="ulp-hy-wSR" secondAttribute="trailing" id="rhG-zO-qB7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Where Is Your Car??" id="Rsd-gb-xS7">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="mMJ-4T-dBM"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="mMJ-4T-dBM">
+                            <connections>
+                                <action selector="plusTapped:" destination="BYZ-38-t0r" id="LKu-jM-hh4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="ulp-hy-wSR" id="C05-Yg-BBh"/>
+                        <outlet property="mySearchBar" destination="PoT-iT-aPY" id="IzZ-Um-WIi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -15,6 +15,8 @@
 		4A3FD6841D5A4F5A0023DA28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3FD6831D5A4F5A0023DA28 /* Assets.xcassets */; };
 		4A3FD6871D5A4F5A0023DA28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3FD6851D5A4F5A0023DA28 /* LaunchScreen.storyboard */; };
 		4A3FD68F1D5A514D0023DA28 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3FD68E1D5A514D0023DA28 /* MapKit.framework */; };
+		4A3FD6941D5A5C010023DA28 /* CarItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3FD6911D5A5C010023DA28 /* CarItem+CoreDataProperties.m */; };
+		4A3FD6951D5A5C010023DA28 /* CarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3FD6931D5A5C010023DA28 /* CarItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,10 @@
 		4A3FD6861D5A4F5A0023DA28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A3FD6881D5A4F5A0023DA28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A3FD68E1D5A514D0023DA28 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4A3FD6901D5A5C010023DA28 /* CarItem+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CarItem+CoreDataProperties.h"; path = "../CarItem+CoreDataProperties.h"; sourceTree = "<group>"; };
+		4A3FD6911D5A5C010023DA28 /* CarItem+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CarItem+CoreDataProperties.m"; path = "../CarItem+CoreDataProperties.m"; sourceTree = "<group>"; };
+		4A3FD6921D5A5C010023DA28 /* CarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarItem.h; path = ../CarItem.h; sourceTree = "<group>"; };
+		4A3FD6931D5A5C010023DA28 /* CarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarItem.m; path = ../CarItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,9 @@
 		4A3FD6731D5A4F5A0023DA28 /* DudeWheresMyCar */ = {
 			isa = PBXGroup;
 			children = (
+				4A3FD6961D5A5C220023DA28 /* AutoMade DoNotTouch */,
+				4A3FD6921D5A5C010023DA28 /* CarItem.h */,
+				4A3FD6931D5A5C010023DA28 /* CarItem.m */,
 				4A3FD6771D5A4F5A0023DA28 /* AppDelegate.h */,
 				4A3FD6781D5A4F5A0023DA28 /* AppDelegate.m */,
 				4A3FD67A1D5A4F5A0023DA28 /* CarMapViewController.h */,
@@ -84,6 +93,15 @@
 				4A3FD6751D5A4F5A0023DA28 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4A3FD6961D5A5C220023DA28 /* AutoMade DoNotTouch */ = {
+			isa = PBXGroup;
+			children = (
+				4A3FD6901D5A5C010023DA28 /* CarItem+CoreDataProperties.h */,
+				4A3FD6911D5A5C010023DA28 /* CarItem+CoreDataProperties.m */,
+			);
+			name = "AutoMade DoNotTouch";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +178,8 @@
 				4A3FD67C1D5A4F5A0023DA28 /* CarMapViewController.m in Sources */,
 				4A3FD6791D5A4F5A0023DA28 /* AppDelegate.m in Sources */,
 				4A3FD6761D5A4F5A0023DA28 /* main.m in Sources */,
+				4A3FD6941D5A5C010023DA28 /* CarItem+CoreDataProperties.m in Sources */,
+				4A3FD6951D5A5C010023DA28 /* CarItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
