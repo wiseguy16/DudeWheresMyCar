@@ -6,13 +6,19 @@
 //  Copyright © 2016 Gregory Weiss. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "CarMapViewController.h"
+#import <MapKit/MapKit.h>
 
-@interface ViewController ()
+@import CoreLocation;
+
+@interface CarMapViewController () <CLLocationManagerDelegate>
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
 
 @end
 
-@implementation ViewController
+@implementation CarMapViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
