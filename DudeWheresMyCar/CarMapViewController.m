@@ -58,21 +58,18 @@
         [self.carItems addObjectsFromArray:carItemsFromCoreData];
         
         
+        
 //  ********************THIS PART HAS PROBLEMS! SEEMS LIKE I DON"T NEED< BUT CORE DATA NOT STORING!!***************
         
-        
-//        CarItem *testItem = self.carItems[0];
-//        NSLog(testItem.carLocationDescription);
-        
-        
-//        CarItem *firstCarItem = self.carItems[0];
-//        double firstLat = firstCarItem.carLocationLat;
-//        double firstLong = firstCarItem.carLocationLong;
-//        CLLocationCoordinate2D theCarWasParkedHere = CLLocationCoordinate2DMake(firstLat, firstLong);
-//        MKPointAnnotation *carHereAnnotation = [[MKPointAnnotation alloc] init];
-//        carHereAnnotation.coordinate = theCarWasParkedHere;
-//        carHereAnnotation.title = firstCarItem.carLocationDescription;
-//        [self.mapView addAnnotation:carHereAnnotation];
+        if (self.carItems.count != 0)
+        {
+            
+            self.aCarItem = self.carItems[0];
+            [self configureAnnotations];
+            NSLog(@"%g carLat", self.aCarItem.carLocationLat);
+            NSLog(@"%g carLong", self.aCarItem.carLocationLong);
+            
+        }
         
         
     }
@@ -89,15 +86,15 @@
 -(void)configureAnnotations
 {
       // ORLANDO configured in bottom method
-    CLLocationCoordinate2D centerDisney = CLLocationCoordinate2DMake(28.418749, -81.581211);
+    CLLocationCoordinate2D carCoordnts = CLLocationCoordinate2DMake(self.aCarItem.carLocationLat, self.aCarItem.carLocationLong);
     // 0 lat is equator north is pos, south is neg
     // 0 long greeninch england west is neg, east is pos of England
-    MKPointAnnotation *centerDisneyAnnotation = [[MKPointAnnotation alloc] init];
-    centerDisneyAnnotation.coordinate = centerDisney;
-    centerDisneyAnnotation.title = @"Center of Disney";
-    [self.annotations addObject:centerDisneyAnnotation];
+    MKPointAnnotation *thisIsMyCarAnnotation = [[MKPointAnnotation alloc] init];
+    thisIsMyCarAnnotation.coordinate = carCoordnts;
+    thisIsMyCarAnnotation.title = self.aCarItem.carLocationDescription;
+    [self.annotations addObject:thisIsMyCarAnnotation];
 
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(centerDisneyAnnotation.coordinate, 75000, 75000);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(thisIsMyCarAnnotation.coordinate, 5000, 5000);
     [self.mapView setRegion:viewRegion animated:YES];
     
     [self.mapView addAnnotations:self.annotations];
@@ -230,9 +227,6 @@
     self.aCarItem.carLocationDescription = @"Here is your Car!";
     [self.carItems addObject:self.aCarItem];
     [self saveContext];
-//    NSLog(self.aCarItem.carLocationDescription);
-    //[self.mySearchBar resignFirstResponder];
-    //self.mySearchBar.text = @"";
 }
 
 
