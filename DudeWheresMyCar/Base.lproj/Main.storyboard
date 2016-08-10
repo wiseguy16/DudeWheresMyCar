@@ -20,7 +20,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ulp-hy-wSR">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </mapView>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Tap to Mark &amp; Label your car" translatesAutoresizingMaskIntoConstraints="NO" id="PoT-iT-aPY">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Tap + to mark your car!" translatesAutoresizingMaskIntoConstraints="NO" id="PoT-iT-aPY">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
