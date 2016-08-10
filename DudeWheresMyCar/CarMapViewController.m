@@ -26,6 +26,7 @@
 
 @property (strong, nonatomic) NSMutableArray *carItems;
 @property (strong, nonatomic) CarItem *aCarItem;
+@property int plusCount;
 
 
 @end
@@ -35,6 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.plusCount = 0;
     self.carItems = [[NSMutableArray alloc] init];
     self.annotations = [[NSMutableArray alloc] init];
     
@@ -43,6 +45,8 @@
     self.moc = appDelegate.managedObjectContext;
     
     // This block will fetch our counter objects from Core Data and load them in the tableView
+  //  if (self.plusCount > 0)
+ //   {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([CarItem class])];
     NSError *error = nil;
     NSArray *carItemsFromCoreData = [self.moc executeFetchRequest:fetchRequest error:&error];
@@ -53,6 +57,8 @@
     else
     {
         [self.carItems addObjectsFromArray:carItemsFromCoreData];
+//        CarItem *testItem = self.carItems[0];
+//        NSLog(testItem.carLocationDescription);
         
         
 //        CarItem *firstCarItem = self.carItems[0];
@@ -65,6 +71,7 @@
 //        [self.mapView addAnnotation:carHereAnnotation];
     }
    // [self configureLocationManager];
+  //  }
 }
 
 - (void)didReceiveMemoryWarning
@@ -179,14 +186,15 @@
     [self enableLocationManager:NO];
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     //CarItem *newCarItem = [[CarItem alloc] init];
-//    self.aCarItem.carLocationLat = location.coordinate.latitude;
-//    self.aCarItem.carLocationLong = location.coordinate.longitude;
-//    [self saveContext];
+    self.aCarItem.carLocationLat = location.coordinate.latitude;
+    self.aCarItem.carLocationLong = location.coordinate.longitude;
     annotation.coordinate = location.coordinate;
     annotation.title = @"Here is your car!!";
-  //  self.aCarItem.carLocationDescription = annotation.title;
-    [self.annotations addObject:annotation];
+    self.aCarItem.carLocationDescription = annotation.title;
+    [self.carItems addObject:self.aCarItem];
     
+    [self.annotations addObject:annotation];
+    [self saveContext];
     [self configureAnnotations]; // This just makes hard coded
 }
 
@@ -231,13 +239,19 @@
 
 - (IBAction)plusTapped:(UIBarButtonItem *)sender
 {
+    self.plusCount = self.plusCount + 1;
     [self configureLocationManager];
+    //UIView *contentView = [sender superview];
     self.aCarItem = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([CarItem class]) inManagedObjectContext:self.moc];
     self.aCarItem.carLocationLat = self.locationManager.location.coordinate.latitude;
     self.aCarItem.carLocationLong = self.locationManager.location.coordinate.longitude;
+    self.aCarItem.carLocationDescription = @"Here is your Car!";
+    [self.carItems addObject:self.aCarItem];
     [self saveContext];
+//    NSLog(self.aCarItem.carLocationDescription);
     //[self.mySearchBar resignFirstResponder];
     //self.mySearchBar.text = @"";
+    
 }
 
 
