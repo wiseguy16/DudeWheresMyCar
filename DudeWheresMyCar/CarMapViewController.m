@@ -26,7 +26,6 @@
 
 @property (strong, nonatomic) NSMutableArray *carItems;
 @property (strong, nonatomic) CarItem *aCarItem;
-@property int plusCount;
 
 
 @end
@@ -36,10 +35,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.plusCount = 0;
     self.carItems = [[NSMutableArray alloc] init];
     self.annotations = [[NSMutableArray alloc] init];
     
+    //[self configureLocationManager];
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     self.moc = appDelegate.managedObjectContext;
@@ -57,6 +56,11 @@
     else
     {
         [self.carItems addObjectsFromArray:carItemsFromCoreData];
+        
+        
+//  ********************THIS PART HAS PROBLEMS! SEEMS LIKE I DON"T NEED< BUT CORE DATA NOT STORING!!***************
+        
+        
 //        CarItem *testItem = self.carItems[0];
 //        NSLog(testItem.carLocationDescription);
         
@@ -69,6 +73,8 @@
 //        carHereAnnotation.coordinate = theCarWasParkedHere;
 //        carHereAnnotation.title = firstCarItem.carLocationDescription;
 //        [self.mapView addAnnotation:carHereAnnotation];
+        
+        
     }
    // [self configureLocationManager];
   //  }
@@ -82,45 +88,21 @@
 
 -(void)configureAnnotations
 {
-  /*
-    // TAMPA
-    CLLocationCoordinate2D tiyTampa = CLLocationCoordinate2DMake(27.770068, -82.63642);
+      // ORLANDO configured in bottom method
+    CLLocationCoordinate2D centerDisney = CLLocationCoordinate2DMake(28.418749, -81.581211);
     // 0 lat is equator north is pos, south is neg
     // 0 long greeninch england west is neg, east is pos of England
-    MKPointAnnotation *tiyTampaAnnotation = [[MKPointAnnotation alloc] init];
-    tiyTampaAnnotation.coordinate = tiyTampa;
-    tiyTampaAnnotation.title = @"The Iron Yard";
-    tiyTampaAnnotation.subtitle = @"Tampa";
-    [self.annotations addObject:tiyTampaAnnotation];
-   */
-    
-    
-    // LAKELAND
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:@"Orlando, FL" completionHandler:^(NSArray *placemarks, NSError *error) {
-        if (!error)
-        {
-            MKPlacemark *placemark = placemarks[0];
-            MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-            annotation.coordinate = placemark.location.coordinate; // Using this later as a center point
-            annotation.title = @"Center of Town";
-       //     [self.mapView addAnnotation:annotation]; // runs in background with network call
-            
-            MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(annotation.coordinate, 5000, 5000);
-            [self.mapView setRegion:viewRegion animated:YES];
-            
-        }
-    }];
-    
-    // ORLANDO configured in bottom method
-    
-    
-    
+    MKPointAnnotation *centerDisneyAnnotation = [[MKPointAnnotation alloc] init];
+    centerDisneyAnnotation.coordinate = centerDisney;
+    centerDisneyAnnotation.title = @"Center of Disney";
+    [self.annotations addObject:centerDisneyAnnotation];
+
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(centerDisneyAnnotation.coordinate, 75000, 75000);
+    [self.mapView setRegion:viewRegion animated:YES];
     
     [self.mapView addAnnotations:self.annotations];
     
 }
-
 
 
 #pragma mark - CLLocation related methods
@@ -140,7 +122,6 @@
                 [self.locationManager requestWhenInUseAuthorization];
             }
         }
-        
         
     }
 }
@@ -185,7 +166,9 @@
     CLLocation *location = [locations lastObject];
     [self enableLocationManager:NO];
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    //CarItem *newCarItem = [[CarItem alloc] init];
+//    UIView *aview = [location superview];      // CAN"T SEEM TO FIGURE OUT SUPERVIEW STUFF!!!!!
+//    MKMapView *aMapView = [aview superview];
+//    self.aCarItem = (CarItem *)[self.mapView superview];
     self.aCarItem.carLocationLat = location.coordinate.latitude;
     self.aCarItem.carLocationLong = location.coordinate.longitude;
     annotation.coordinate = location.coordinate;
@@ -198,28 +181,28 @@
     [self configureAnnotations]; // This just makes hard coded
 }
 
-#pragma mark - Search bar method
+#pragma mark - Search bar method  // DECIDED NOT TO USE SEARCH BAR, TOO MUCH ELSE NOT WORKING!!!!!!
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     // called when keyboard search button pressed
-    [self configureLocationManager];
+  //  [self configureLocationManager];
     
     if ([self.mySearchBar.text  isEqual: @""])
     {
         return;
     }
     
-    self.aCarItem = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([CarItem class]) inManagedObjectContext:self.moc];
-    self.aCarItem.carLocationDescription = self.mySearchBar.text;
+  //  self.aCarItem = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([CarItem class]) inManagedObjectContext:self.moc];
+  //  self.aCarItem.carLocationDescription = self.mySearchBar.text;
     //aCarItem.carLocationLat =
-    //CLLocation *location =
-   // [self.carItems addObject:aCarItem];
-    [self saveContext];
+   // CLLocation *location =
+   //[self.carItems addObject:aCarItem];
+  //  [self saveContext];
     [self doSearch:self.mySearchBar.text];
 }
 
-#pragma mark - Using api inside of a custom search method
+#pragma mark - NOT REALLY USING THIS!!!!
 
 -(void)doSearch:(NSString *)descriptionForCar
 {
@@ -239,7 +222,6 @@
 
 - (IBAction)plusTapped:(UIBarButtonItem *)sender
 {
-    self.plusCount = self.plusCount + 1;
     [self configureLocationManager];
     //UIView *contentView = [sender superview];
     self.aCarItem = [NSEntityDescription insertNewObjectForEntityForName: NSStringFromClass([CarItem class]) inManagedObjectContext:self.moc];
@@ -251,7 +233,6 @@
 //    NSLog(self.aCarItem.carLocationDescription);
     //[self.mySearchBar resignFirstResponder];
     //self.mySearchBar.text = @"";
-    
 }
 
 
